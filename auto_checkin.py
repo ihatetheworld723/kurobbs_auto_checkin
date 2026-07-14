@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 import hashlib, time, random
 from datetime import datetime
@@ -39,7 +39,6 @@ class KurobbsClient:
         self.result: Dict[str, str] = {}
         self.exceptions: List[Exception] = []
         self.devcode = self.generate_fixed_string(uid)
-        self.ip = "10.0.2.2" + uid[-2:]
 
     def generate_fixed_string(self, input_string, length=40):
         if not input_string:
@@ -61,19 +60,15 @@ class KurobbsClient:
     def get_headers(self) -> Dict[str, str]:
         """Get the headers required for API requests."""
         return {
-            "osversion": "Android",
             "devcode": self.devcode,
-            "countrycode": "CN",
-            "ip": self.ip,
-            "model": "2211133C",
-            "source": "android",
-            "lang": "zh-Hans",
-            "version": "1.0.9",
-            "versioncode": "1090",
+            "source": "h5",
+            "version": "3.1.3",
             "token": self.token,
+            "Host": "api.kurobbs.com",
+            "Origin": "https://www.kurobbs.com",
+            "Referer": "https://www.kurobbs.com/",
             "content-type": "application/x-www-form-urlencoded; charset=utf-8",
-            "accept-encoding": "gzip",
-            "user-agent": "okhttp/3.10.0",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
         }
 
     def make_request(self, url: str, data: Dict[str, Any]) -> Response:
@@ -296,3 +291,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
