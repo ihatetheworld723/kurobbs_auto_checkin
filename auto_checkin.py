@@ -226,6 +226,8 @@ class KurobbsClient:
         logger.debug(resp)
         if resp.success:
             self.result[action_name] = success_message
+        elif "重复签到" in resp.msg or "重复" in resp.msg:
+            self.result[action_name] = f"{success_message}（今日已签）"
         else:
             self.exceptions.append(KurobbsClientException(f'{failure_message}, {resp.msg}'))
 
